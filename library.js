@@ -1,0 +1,2 @@
+let student;
+let dolgbook;
