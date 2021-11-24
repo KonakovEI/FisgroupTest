@@ -170,15 +170,28 @@ class Authors{
 function HardCoreReader(idStudent){
     let dateOnReadBook = 14;
     let countBadReader = 0;
-    //КоличествоОперацийСКнигамиВзялОтдал
-    for (let i = 0; i < Count(Issuing.idIssuing); i++){
-        Issuing.idIssuing = i
-        if (Issuing.dateReturn <= Issuing.dateIssuing.setDay(Issuing.dateIssuing.getDay() + dateOnReadBook)){
 
-        }
-        if (Issuing.idStudent == idStudent){
-            
+    var arr = Issuings;
+    //получаем из массива Выдача(Issuings) все записи студента(idStudent)
+    var BadReader = arr.filter(function(idStudent){
+        return idStudent
+    });
+
+    //Количество Операций С Книгами Взял Отдал студента
+    for (let i = 0; i < Count(BadReader); i++)
+    {        
+        //получаем из выборки BadReader все случае когда время сдачи было нарушенно, 
+        //      для каждого такого случая в пустую переменную прибавляем 1
+        BadReader.filter(function(countBadReader){
+            if (dateReturn <= dateIssuing.setDay(dateIssuing.getDay() + dateOnReadBook))
+            {
+                return countBadReader + 1
+            }
+        });
+        
+        //если счетчик нарушений времени сдачи больше 3, то студент 'злостный читатель'
+        if (countBadReader > 3){
+            return alert(idStudent + ' ' + 'злостный читатель')
         }
     }
-
 }
